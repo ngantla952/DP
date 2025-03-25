@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soldier Information</title>
+    <style>
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        #section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .section_1 {
+            margin: 10px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            margin: 10px;
+            padding: 12px;
+            font-size: 16px;
+            width: 220px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin: 10px;
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 220px;
+            border-radius: 4px;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        #addBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #displayBtn {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        #clearInputsBtn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #clearDisplayBtn {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        #searchBtn {
+            background-color: #9C27B0;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        #demo_div p {
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            margin: 5px 0;
+        }
+
+        #seh {
+            margin: 10px;
+            padding: 12px;
+            width: 220px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+    </style>
+    <script>
+        var sold = [];
+
+        function addSoldier() {
+            const name = document.getElementById("nameid").value;
+            const age = document.getElementById("ageid").value;
+            const height = document.getElementById("heightid").value;
+            const id = document.getElementById("soldierid").value;
+
+            let soldier = new addme(name, age, height, id);
+            sold.push(soldier);
+        }
+
+        function clearinputs() {
+            document.getElementById("nameid").value = '';
+            document.getElementById("ageid").value = '';
+            document.getElementById("heightid").value = '';
+            document.getElementById("soldierid").value = '';
+        }
+
+        function clearDisplay() {
+            document.getElementById("demo_div").innerHTML = " ";
+        }
+
+        function addme(name, age, height, id) {
+            this.name = name;
+            this.age = age;
+            this.height = height;
+            this.id = id;
+
+            this.describe = function() {
+                return "Data: " + this.name + " " + this.age + " " + this.height + " " + this.id;
+            };
+        }
+
+        function displaySoldiers() {
+            let allInfo = '';
+            for (let i = 0; i < sold.length; i++) {
+                allInfo += '<p>' + sold[i].describe() + '</p>';
+            }
+            document.getElementById("demo_div").innerHTML = allInfo;
+        }
+
+        function search() {
+            var searchTerm = document.getElementById("seh").value.toLowerCase();
+            var results = '';
+            for (let i = 0; i < sold.length; i++) {
+                if (sold[i].name.toLowerCase().includes(searchTerm) || sold[i].id.includes(searchTerm)) {
+                    results += '<p>' + sold[i].describe() + '</p>';
+                }
+            }
+            document.getElementById("demo_div").innerHTML = results ? results : "No results found";
+        }
+    </script>
+</head>
+<body>
+    <h1>Soldiers Data</h1>
+    <div id="section">
+        <div class="section_1">
+            <div>
+                <input id="nameid" placeholder="Enter his name">
+                <input id="ageid" placeholder="Enter his age">
+            </div>
+            <div>
+                <input id="heightid" placeholder="Enter his height">
+                <input type="text" id="soldierid" placeholder="Enter the ID">
+            </div>
+        </div>
+
+        <div>
+            <button id="addBtn" onclick="addSoldier()">Add Soldier</button>
+            <button id="displayBtn" onclick="displaySoldiers()">Display Soldiers</button>
+            <button id="clearInputsBtn" onclick="clearinputs()">Clear Inputs</button>
+            <button id="clearDisplayBtn" onclick="clearDisplay()">Clear Display</button>
+        </div>
+
+        <div>
+            <input placeholder="Search Information" id="seh">
+            <button id="searchBtn" onclick="search()">Search</button>
+        </div>
+    </div>
+
+    <div id="demo_div"></div>
+</body>
+</html>

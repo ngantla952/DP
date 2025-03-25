@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        const colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "cyan", "brown"];
+        var inx = 0;
+        function sum() {
+            let a = parseFloat(document.getElementById("num1").value);
+            let b = parseFloat(document.getElementById("num2").value);
+            var sum = 0;
+
+
+
+            if (a < b) {
+                do {
+                    sum += a;
+                    a++;
+                } while (a <= b);
+            }
+
+            document.getElementById("display").innerHTML = sum;
+            document.getElementById("display").style.color = "your sum : " + colors[inx];
+
+            inx = (inx + 1) % colors.length;
+        }
+
+    </script>
+</head>
+
+<body>
+    <input type="number" id="num1" placeholder="Enter first number">
+    <input type="number" id="num2" placeholder="Enter 2nd number">
+    <button onclick=sum()> enter</button>
+    <div id="display"></div>
+</body>
+
+</html>

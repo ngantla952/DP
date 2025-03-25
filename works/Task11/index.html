@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+       function runfun() {
+              var val = document.getElementById("inp").value ;
+              var count = "" ;
+
+              for(let i = 1; i <= val; i++) {
+                for(let j = 1 ; j <= i; j++ ) {
+                   count += "* " ; 
+                }
+                count += "<br> " ;
+              }
+              
+              document.getElementById("oncall").innerHTML = count ;
+        }
+    </script>
+</head>
+<body>
+    <input id = "inp" placeholder="enter a positive number" oninput=runfun()>
+    <div id = "oncall" ></div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script>
+        let arr = [];
+
+        function add() {
+            const inputBox = document.getElementById('val');
+            const inputValue = inputBox.value;
+            if (inputValue) {
+                arr.push(inputValue);
+                inputBox.value = '';
+                updateSequenceDisplay();
+            } else {
+                alert('invalid');
+            }
+        }
+
+        function rem() {
+            if (arr.length > 0) {
+                arr.pop();
+                updateSequenceDisplay();
+            }
+        }
+
+        function updateSequenceDisplay() {
+            const output = document.getElementById('disp');
+            output.textContent = arr.join() ;
+        }
+     </script>
+
+
+</head>
+<body>
+     <h2>stack sequence</h2>
+     <input id="val" placeholder="Enter the char" />
+     <button id="add" onclick="add()">add task</button>
+     <button id="remove" onclick="rem()">undo task</button><br>
+     <p id="disp">your sequence: </p>
+</body>
+</html>

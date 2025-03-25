@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Class Works</title>
+    <style>
+body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #333;
+    transition: background 0.5s, color 0.5s;
+}
+
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #ebe1e1;
+}
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #f0f4f8;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    transition: background 0.5s;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.dark-mode #sidebar {
+    background-color: #2c3e50;
+}
+
+#sidebar .header {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(to right, #4a90e2, #50e3c2);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.5s;
+    flex-shrink: 0;
+}
+
+.dark-mode #sidebar .header {
+    background: linear-gradient(to right, #2c3e50, #34495e);
+}
+
+#navigation {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 10px;
+    overflow-y: auto;
+    flex-grow: 1;
+    max-height: calc(100vh - 80px);
+}
+
+#navigation button {
+    position: relative;
+    background: #4a90e2;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+
+.dark-mode #navigation button {
+    background: #34495e;
+}
+
+#navigation button:hover {
+    background: #50e3c2;
+    color: #4a90e2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode #navigation button:hover {
+    background: #4a90e2;
+    color: #50e3c2;
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 150px;
+    background-color: #4a90e2;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .tooltip {
+    background-color: #34495e;
+}
+
+#navigation button:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 30px;
+    background: white;
+    min-height: 100vh;
+    transition: background 0.5s;
+}
+
+.dark-mode .content {
+    background: #2d2d2d;
+    color: #1a1515;
+}
+
+#frame {
+    width: 100%;
+    height: 80vh;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#toggle-theme {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4a90e2;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    z-index: 3;
+}
+
+.dark-mode #toggle-theme {
+    background: #34495e;
+}
+
+#toggle-theme:hover {
+    background: #50e3c2;
+    color: #4a90e2;
+}
+
+.dark-mode #toggle-theme:hover {
+    background: #4a90e2;
+    color: #50e3c2;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        width: 200px;
+    }
+
+    .content {
+        margin-left: 200px;
+    }
+
+    #frame {
+        height: 60vh;
+    }
+
+    #navigation button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    .header {
+        font-size: 20px;
+        padding: 15px;
+    }
+}
+    </style>
+  </head>
+  <body>
+    <button id="toggle-theme" aria-label="Toggle dark mode">Dark Mode</button>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <div class="header">Class Works</div>
+      <div id="navigation"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+      <iframe
+        id="frame"
+        src="works/landing.html"
+        title="Class Works Content"
+      ></iframe>
+    </div>
+
+    <script>
+      const themeToggle = document.getElementById("toggle-theme");
+      const body = document.body;
+
+      const darkMode = localStorage.getItem("darkMode") === "true";
+      if (darkMode) {
+        body.classList.add("dark-mode");
+      }
+
+      themeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem("darkMode", body.classList.contains("dark-mode"));
+      });
+
+      const works = {
+        task1: {
+          title: "Task 1",
+          url: "works/Task2/index.html",
+          description: "Expectations and Goals",
+        },
+        task2: {
+          title: "Task 2",
+          url: "works/Task2/dashboardd.html",
+          description: "HTML Styling and Layout",
+        },
+        task3: {
+          title: "Task 3",
+          url: "works/Task3/index.html",
+          description: "Hover Effects and Animations",
+        },
+        task4: {
+          title: "Task 4",
+          url: "works/Task4/index.html",
+          description: "JavaScript Basics",
+        },
+        task5: {
+          title: "Task 5",
+          url: "works/Task5/calc_js.html",
+          description: "JavaScript Calculator",
+        },
+        task7: {
+          title: "Task 8",
+          url: "works/Task8/index.html",
+          description: "Advanced JavaScript",
+        },
+        task8: {
+          title: "Task 9",
+          url: "works/Task9/index.html",
+          description: "Text Converter",
+        },
+        task9: {
+          title: "Task 10",
+          url: "works/Task10/index.html",
+          description: "Score Evaluator",
+        },
+        task10: {
+          title: "Task 11",
+          url: "works/Task11/index.html",
+          description: "Array Storage",
+        },
+        task11: {
+          title: "Task 12",
+          url: "works/Task12/index.html",
+          description: "Star Pattern Printing",
+        },
+        task12: {
+          title: "Task 12b",
+          url: "works/task12/code.html",
+          description: "Pattern",
+        },
+        task14: {
+          title: "Task 13",
+          url: "works/Task13/index.html",
+          description: "Object Data Handling",
+        },
+        task15: {
+          title: "Task 14",
+          url: "works/Task14/index.html",
+          description: "Nested Objects",
+        },
+        task16: {
+          title: "Task 14b",
+          url: "works/Task14/ind.html",
+          description: "Value Generator",
+        },
+        task17: {
+          title: "Task 15",
+          url: "works/Task15/sorc.html",
+          description: "checkout",
+        },
+        task18: {
+          title: "Task 15b",
+          url: "works/Task15/task.html",
+          description: "Number",
+        },
+        task19: {
+          title: "Task 16",
+          url: "works/Task16/index.html",
+          description: "Task_json"
+        },
+      };
+
+      const navDiv = document.getElementById("navigation");
+      const contentFrame = document.getElementById("frame");
+
+      // Create navigation buttons
+      for (const key in works) {
+        if (works.hasOwnProperty(key)) {
+          const work = works[key];
+          const navItem = document.createElement("button");
+          navItem.textContent = work.title;
+
+          const tooltip = document.createElement("div");
+          tooltip.classList.add("tooltip");
+          tooltip.textContent = work.description;
+          navItem.appendChild(tooltip);
+
+          navItem.addEventListener("click", () => {
+            contentFrame.src = work.url;
+          });
+          navDiv.appendChild(navItem);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+    <script>
+        const colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "cyan", "brown"];
+        var inx = 0;
+        function runfun() {
+            var val = document.getElementById("inp").value;
+            var count = "";
+
+            for (let i = 1; i <= val; i++) {
+                for (let j = 1; j <= i; j++) {
+                    count += "* ";
+                }
+                count += "<br> ";
+            }
+
+            document.getElementById("oncall").innerHTML = count;
+            document.getElementById("oncall").style = "color : " + colors[inx];
+            inx = (inx + 1) % colors.length;
+        } 
+    </script>
+</head>
+
+<body>
+    <input id="inp" placeholder="enter a positive number" oninput=runfun()>
+    <div id="oncall"></div>
+</body>
+
+</html>

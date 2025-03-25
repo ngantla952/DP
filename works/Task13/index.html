@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soldier Information</title>
+    <script>
+        var sold = [];
+
+        function addSoldier() {
+            const name = document.getElementById("nameid").value;
+            const age = document.getElementById("ageid").value;
+            const height = document.getElementById("heightid").value;
+            const id = document.getElementById("soldierid").value;
+
+            const soldier = {
+                name: name,
+                id: id,
+                age: age,
+                height: height,
+                description: function() {
+                    return "His name is " + this.name + ". His ID number is " + this.id + ", and he is " + this.age + " years old with a height of " + this.height + " feet.";
+                }
+            };
+
+            sold.push(soldier);
+
+            document.getElementById("nameid").value = '';
+            document.getElementById("ageid").value = '';
+            document.getElementById("heightid").value = '';
+            document.getElementById("soldierid").value = '';
+        }
+
+        function displaySoldiers() {
+            let allInfo = '';
+            for (let i = 0; i < sold.length; i++) {
+                allInfo += '<p>' + sold[i].description() + '</p>';
+            }
+            document.getElementById("demo_div").innerHTML = allInfo;
+        }
+    </script>
+</head>
+<body>
+    
+    <input id="nameid" placeholder="Enter his name">
+    <input id="ageid" placeholder="Enter his age">
+    <input id="heightid" placeholder="Enter his height">
+    <input type="text" id="soldierid" placeholder="Enter the ID">
+
+    <button onclick="addSoldier()">Add Soldier</button>
+    <button onclick="displaySoldiers()">Display Soldiers</button>
+
+    <div id="demo_div"></div>
+</body>
+</html>
+
